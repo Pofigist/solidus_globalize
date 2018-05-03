@@ -3,8 +3,6 @@ module Spree
     translates :name, :description, :meta_description, :meta_keywords,
       fallbacks_for_empty_translations: true
 
-    friendly_id :slug_candidates, use: [:history, :globalize]
-
     include SolidusGlobalize::Translatable
 
     translation_class.class_eval do
