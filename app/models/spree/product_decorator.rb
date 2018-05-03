@@ -16,17 +16,8 @@ module Spree
       # in every Globalize query method.
       self.default_scopes = []
 
-      # Punch slug on every translation to allow reuse of original
-      after_destroy :punch_slug
-
-      def punch_slug
-        update(slug: "#{Time.now.to_i}_#{slug}")
-      end
+      
     end
-
-    # Don't punch slug on original product as it prevents bulk deletion.
-    # Also we don't need it, as it is translated.
-    def punch_slug; end
 
     # Allow to filter products through their translations, too
     def self.like_any(fields, values)
@@ -47,7 +38,6 @@ module Spree
 
     def duplicate_translations(old_product)
       old_product.translations.each do |translation|
-        translation.slug = nil # slug must be regenerated
         self.translations << translation.dup
       end
     end
