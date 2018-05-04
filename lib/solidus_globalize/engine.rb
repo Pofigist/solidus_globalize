@@ -1,5 +1,4 @@
 require 'globalize'
-require 'friendly_id/globalize'
 
 module SolidusGlobalize
   class Engine < Rails::Engine
@@ -12,7 +11,7 @@ module SolidusGlobalize
     end
 
     initializer "solidus_globalize.permitted_attributes", before: :load_config_initializers do |app|
-      taxon_attributes = { translations_attributes: [:id, :locale, :name, :description, :permalink, :meta_description, :meta_keywords, :meta_title] }
+      taxon_attributes = { translations_attributes: [:id, :locale, :name, :description, :meta_description, :meta_keywords, :meta_title] }
       Spree::PermittedAttributes.taxon_attributes << taxon_attributes
 
       option_value_attributes = { translations_attributes: [:id, :locale, :name, :presentation] }
